@@ -38,9 +38,18 @@ const Product = require('../models/product')
     })
   }
 
+  exports.getOrders = (req, res, next) =>{
+    res.render('shop/orders', {
+      path: '/orders',
+      PageTitle:'Your Orders'
+    })
+  }
+
   exports.getCheckout = (res, req, next) =>{
     res.render('shop/checkout', {
       path:'/checkout',
       PageTitle: 'Checkout'
     })
   }
+
+  
