@@ -11,7 +11,8 @@ const p = path.join(
   );
 
 
-module.exports = class Cart {
+module.exports = class Cart 
+{
     static addProduct(id, productPrice) {
         //Fetch the previous cart
         fs.readFile(p,(err, fileContent) => {
@@ -55,7 +56,7 @@ module.exports = class Cart {
                 return;
             }
 
-            const updatedCart = {...cart};
+            const updatedCart = {...JSON.parse(fileContent)};
             const product = updatedCart.products.find(prod => prod.id === id);
             const productQty = product.qty;
             updatedCart.products = updatedCart.products.filter(prod => prod.id !== id);
