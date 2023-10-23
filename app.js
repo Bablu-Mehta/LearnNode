@@ -2,12 +2,16 @@ const path = require('path');
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const errorController = require("./Controller/error")
+const errorController = require("./Controller/error");
+
+const db = require('./util/database');
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 const app = express();
+
+db.execute('select * from products').then().catch();
 
 app.set('view engine', 'ejs');//where to compile the dynamic template
 app.set('views', 'views');
