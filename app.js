@@ -11,7 +11,12 @@ const shopRoutes = require("./routes/shop");
 
 const app = express();
 
-db.execute('select * from products').then().catch();
+db.execute('select * from products')
+.then(result=>{
+    console.log(result);
+}).catch(err => {
+    console.log(err);
+});
 
 app.set('view engine', 'ejs');//where to compile the dynamic template
 app.set('views', 'views');
