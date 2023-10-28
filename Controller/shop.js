@@ -2,14 +2,15 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll((products) => {
+  Product.fetchAll().then(([rows, fieldData])=>{
     res.render("shop/product-list", {
-      prods: products,
+      prods: rows,
       PageTitle: "All Products",
       path: "/products",
     });
-  });
-
+  })
+  .catch((err) => console.log(err));
+ 
   //this is where we are using the template engine and we dont have to
   //define the location and the type because we already defined it in the
   //app.js file to which type of template we are using and where is the location
@@ -21,13 +22,13 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId, (product) => {
+  Product.findById(prodId).then(([product])=>{
     res.render("shop/product-detail", {
-      product: product,
+      product: product[0],
       PageTitle: product.title,
       path: "/products",
     });
-  });
+  }).catch(err => console.log(err));
 };
 
 exports.getIndex = (req, res, next) => {
