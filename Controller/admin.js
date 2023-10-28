@@ -16,8 +16,10 @@ exports.getAddProducts = (req, res, next) => {
     const description = req.body.description;
 
     const product = new Product(null, title, imageUrl, description, price);
-    product.save();
-    res.redirect("/");
+    product.save().then(()=>{
+      res.redirect("/");
+    }).catch(err => console.log(err) );
+    
   }
 
 
